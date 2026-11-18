@@ -57,6 +57,13 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
   fstab listed the crypto footer partition as an `emmc` `/metadata`
   volume).
 - The kernel version string carries a fixed build user and host.
+- USB tethering and the Wi-Fi hotspot: the kernel has the `rpfilter`
+  match netd needs for tethering; hostapd may enter `/data/vendor/wifi`;
+  the Wi-Fi HAL switches bcmdhd between station and SoftAP firmware mode
+  (`op_mode`), so the hotspot sends beacons; the hotspot can use 5 GHz.
+  The driver refuses the p2p device in SoftAP mode instead of crashing.
+  Without mobile data the hotspot has no internet source (the chip runs
+  either station or SoftAP, not both).
 
 Every change is a separate commit (Conventional Commits) with the reason
 in its message.
