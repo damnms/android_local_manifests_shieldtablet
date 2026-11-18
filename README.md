@@ -64,6 +64,9 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
   The driver refuses the p2p device in SoftAP mode instead of crashing.
   Without mobile data the hotspot has no internet source (the chip runs
   either station or SoftAP, not both).
+- GPS (Broadcom BCM4752): the daemon and HAL module from the 15.1/16.0
+  vendor tree are back, with the GNSS 1.0 HAL as a binderized service, a
+  shim for `SSLv3_client_method` (gone from BoringSSL) and SELinux rules.
 
 Every change is a separate commit (Conventional Commits) with the reason
 in its message.
