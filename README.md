@@ -70,6 +70,13 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
   It works standalone: no daily LTO download from Broadcom, no SUPL.
 - Audio: a 4-pole headset's microphone can be used for recording (the
   capture route left out the wired headset mic).
+- Screen recording from Quick Settings: SystemUI no longer forces AVC
+  Main level 3 (too small for the screen, the NVIDIA encoder hung), and
+  the kernel no longer asks for the `open` permission on `ftruncate()`
+  of an already open file (backport of upstream "selinux: do not check
+  open perm on ftruncate call"), so mediaserver can finish the file.
+- Wi-Fi reconnects within seconds with the screen off: hardware PNO is
+  enabled in the Wi-Fi overlay (Android 11 ignored the old setting).
 
 Every change is a separate commit (Conventional Commits) with the reason
 in its message.
