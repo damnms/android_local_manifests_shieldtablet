@@ -22,13 +22,13 @@
   <project path="device/nvidia/shieldtablet" name="damnms/android_device_nvidia_shieldtablet" remote="github" revision="lineage-18.1-shieldtablet" />
   <project path="device/nvidia/t124-common" name="damnms/android_device_nvidia_t124-common" remote="github" revision="lineage-18.1-shieldtablet" />
   <project path="device/nvidia/tegra-common" name="damnms/android_device_nvidia_tegra-common" remote="github" revision="lineage-18.1-shieldtablet" />
+  <project path="device/nvidia/shield-common" name="damnms/android_device_nvidia_shield-common" remote="github" revision="lineage-18.1-shieldtablet" />
   <project path="device/nvidia/touch" name="damnms/android_device_nvidia_touch" remote="github" revision="lineage-18.1-shieldtablet" />
   <project path="device/nvidia/sepolicy" name="damnms/android_device_nvidia_sepolicy" remote="github" revision="lineage-18.1-shieldtablet" />
   <project path="kernel/nvidia/shield" name="damnms/android_kernel_nvidia_shield" remote="github" revision="lineage-18.1-shieldtablet" />
   <project path="vendor/nvidia" name="damnms/proprietary_vendor_nvidia" remote="github" revision="lineage-18.1-shieldtablet" />
 
   <!-- Unchanged LineageOS repositories -->
-  <project path="device/nvidia/shield-common" name="LineageOS/android_device_nvidia_shield-common" />
   <project path="device/nvidia/icera" name="LineageOS/android_device_nvidia_icera" />
   <project path="hardware/nvidia/interfaces" name="LineageOS/android_hardware_nvidia_interfaces" />
   <project path="hardware/nvidia/light" name="LineageOS/android_hardware_nvidia_light" />

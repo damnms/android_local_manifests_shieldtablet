@@ -12,6 +12,7 @@ version the 3.10 kernel can run (Android 12 needs eBPF).
 | `device/nvidia/shieldtablet` | [damnms/android_device_nvidia_shieldtablet](https://github.com/damnms/android_device_nvidia_shieldtablet) | `lineage-18.1-shieldtablet` |
 | `device/nvidia/t124-common` | [damnms/android_device_nvidia_t124-common](https://github.com/damnms/android_device_nvidia_t124-common) | `lineage-18.1-shieldtablet` |
 | `device/nvidia/tegra-common` | [damnms/android_device_nvidia_tegra-common](https://github.com/damnms/android_device_nvidia_tegra-common) | `lineage-18.1-shieldtablet` |
+| `device/nvidia/shield-common` | [damnms/android_device_nvidia_shield-common](https://github.com/damnms/android_device_nvidia_shield-common) | `lineage-18.1-shieldtablet` |
 | `device/nvidia/touch` | [damnms/android_device_nvidia_touch](https://github.com/damnms/android_device_nvidia_touch) | `lineage-18.1-shieldtablet` |
 | `device/nvidia/sepolicy` | [damnms/android_device_nvidia_sepolicy](https://github.com/damnms/android_device_nvidia_sepolicy) | `lineage-18.1-shieldtablet` |
 | `kernel/nvidia/shield` | [damnms/android_kernel_nvidia_shield](https://github.com/damnms/android_kernel_nvidia_shield) | `lineage-18.1-shieldtablet` |
@@ -21,7 +22,7 @@ version the 3.10 kernel can run (Android 12 needs eBPF).
 | `frameworks/opt/net/wifi` | [damnms/android_frameworks_opt_net_wifi](https://github.com/damnms/android_frameworks_opt_net_wifi) | `lineage-18.1-shieldtablet` |
 | `hardware/interfaces` | [damnms/android_hardware_interfaces](https://github.com/damnms/android_hardware_interfaces) | `lineage-18.1-shieldtablet` |
 | `system/memory/lmkd` | [damnms/android_system_memory_lmkd](https://github.com/damnms/android_system_memory_lmkd) | `lineage-18.1-shieldtablet` |
-| `device/nvidia/shield-common`, `device/nvidia/icera`, `hardware/nvidia/*` | LineageOS, unchanged | `lineage-18.1` |
+| `device/nvidia/icera`, `hardware/nvidia/*` | LineageOS, unchanged | `lineage-18.1` |
 
 All forks keep their upstream branch `lineage-18.1` untouched; the device
 work sits on top of it on `lineage-18.1-shieldtablet`. The rest of the tree
@@ -48,6 +49,10 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
 - WebView/browser: no GL preload in zygote; libglcore realloc fix (the
   browser no longer waits ~10 s on start).
 - Sensors as a binderized HAL, own OTA and changelog URLs.
+- Wi-Fi uses a randomized MAC per network; scans skip channels the driver
+  does not offer yet (no stall on DFS networks after boot).
+- The NVIDIA Games (TegraZone) app is left out; it cannot be updated and
+  ran telemetry in the background.
 
 Every change is a separate commit (Conventional Commits) with the reason
 in its message.
