@@ -67,7 +67,8 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
 - GPS (Broadcom BCM4752): the daemon and HAL module from the 15.1/16.0
   vendor tree are back, with the GNSS 1.0 HAL as a binderized service, a
   shim for `SSLv3_client_method` (gone from BoringSSL) and SELinux rules.
-  It works standalone: no daily LTO download from Broadcom, no SUPL.
+  It works standalone: no daily LTO download and no RTI status download
+  from Broadcom, no PSDS servers, no SUPL.
 - Audio: a 4-pole headset's microphone can be used for recording (the
   capture route left out the wired headset mic).
 - Screen recording from Quick Settings: SystemUI no longer forces AVC
