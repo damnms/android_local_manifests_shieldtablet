@@ -53,6 +53,10 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
   does not offer yet (no stall on DFS networks after boot).
 - The NVIDIA Games (TegraZone) app is left out; it cannot be updated and
   ran telemetry in the background.
+- Recovery: *Format data* no longer ends with "Data wipe failed" (the
+  fstab listed the crypto footer partition as an `emmc` `/metadata`
+  volume).
+- The kernel version string carries a fixed build user and host.
 
 Every change is a separate commit (Conventional Commits) with the reason
 in its message.
