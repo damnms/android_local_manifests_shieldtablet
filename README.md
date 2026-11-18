@@ -85,6 +85,12 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
   no cpusets), no unused `/mnt/tmp`, no touch `.ini` links or NvCPL
   keylayout directories in `/data`; fstrim no longer logs a denial for
   the calibration partition.
+- Wi-Fi networks the chip cannot join are shown in the Wi-Fi list as
+  "Not supported by this device (WPA3 or PMF required)" and cannot be
+  selected: WPA3 only, or only the SHA256 suites (WPA2 with PMF required).
+  Quick Settings open the Wi-Fi list for them instead of the password page.
+- Wi-Fi with "Use device MAC" connects with the factory MAC; the driver
+  reported the placeholder `00:90:4c:11:22:33` as the permanent address.
 
 Known and harmless: a few denials of platform domains (`storaged` reading
 eMMC statistics, Settings calling `storaged`/`wificond`, Gallery reading a
@@ -128,6 +134,9 @@ device repositories a second time via roomservice. The result is
   (`fastboot flash recovery`) and *Format data*.
 - From the LineageOS recovery, reboot with *Reboot system now*;
   `adb reboot` makes the bootloader load the recovery again.
+- Wi-Fi security: WPA2-PSK, WPA2-Enterprise and WPA2/WPA3 transition
+  networks work. The bcm43241 firmware has no SAE and no PMF (802.11w), so
+  WPA3-only networks and networks with PMF required cannot work.
 - `vendor/nvidia` contains NVIDIA's proprietary binaries as published by
   TheMuppets; three camera libraries and `libglcore` carry small symbol
   renames (see `device/nvidia/t124-common/extract/patches.sh`).
