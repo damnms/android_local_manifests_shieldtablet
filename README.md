@@ -68,7 +68,10 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
   vendor tree are back, with the GNSS 1.0 HAL as a binderized service, a
   shim for `SSLv3_client_method` (gone from BoringSSL) and SELinux rules.
   It works standalone: no daily LTO download and no RTI status download
-  from Broadcom, no PSDS servers, no SUPL.
+  from Broadcom, no PSDS servers, no SUPL. The GNSS wrapper copies the
+  NMEA sentences of the Broadcom module (they are not null-terminated),
+  and the system init creates `/data/system/gps`, so GPS also starts
+  after *Format data*.
 - Audio: a 4-pole headset's microphone can be used for recording (the
   capture route left out the wired headset mic).
 - Screen recording from Quick Settings: SystemUI no longer forces AVC
@@ -78,6 +81,15 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
   open perm on ftruncate call"), so mediaserver can finish the file.
 - Wi-Fi reconnects within seconds with the screen off: hardware PNO is
   enabled in the Wi-Fi overlay (Android 11 ignored the old setting).
+- Boot without dead setup steps: no cpuset writes (the 3.10 kernel has
+  no cpusets), no unused `/mnt/tmp`, no touch `.ini` links or NvCPL
+  keylayout directories in `/data`; fstrim no longer logs a denial for
+  the calibration partition.
+
+Known and harmless: a few denials of platform domains (`storaged` reading
+eMMC statistics, Settings calling `storaged`/`wificond`, Gallery reading a
+camera property) and boot log lines from AOSP or configfs init files that
+do not apply to this kernel. None of them has a visible effect.
 
 Every change is a separate commit (Conventional Commits) with the reason
 in its message.
