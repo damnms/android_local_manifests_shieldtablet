@@ -91,6 +91,9 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
   Quick Settings open the Wi-Fi list for them instead of the password page.
 - Wi-Fi with "Use device MAC" connects with the factory MAC; the driver
   reported the placeholder `00:90:4c:11:22:33` as the permanent address.
+- The backlight stays at PWM level 30 or above (the panel flickers below):
+  slider minimum, the dimmed screen before screen off and the darkest
+  automatic brightness level.
 
 Known and harmless: a few denials of platform domains (`storaged` reading
 eMMC statistics, Settings calling `storaged`/`wificond`, Gallery reading a
