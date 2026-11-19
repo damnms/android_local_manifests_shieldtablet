@@ -95,6 +95,9 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
 - The backlight stays at PWM level 30 or above (the panel flickers below):
   slider minimum, the dimmed screen before screen off and the darkest
   automatic brightness level.
+- Wi-Fi Direct: the tablet is visible and connects also with a randomized
+  MAC (the P2P device address is derived from the factory MAC); switching
+  Wi-Fi off with the Wi-Fi Direct page open no longer panics the kernel.
 - Chrome/Chromium no longer shows garbled content: the NVIDIA HWC1 shows
   buffers of SurfaceControl layers wrongly as overlays, so SurfaceFlinger
   composes these layers on the GPU (`debug.sf.client_composition_buffer_state`).
@@ -144,6 +147,11 @@ device repositories a second time via roomservice. The result is
 - Wi-Fi security: WPA2-PSK, WPA2-Enterprise and WPA2/WPA3 transition
   networks work. The bcm43241 firmware has no SAE and no PMF (802.11w), so
   WPA3-only networks and networks with PMF required cannot work.
+- Wi-Fi Direct runs on the same channel as the Wi-Fi connection (the
+  firmware has no multi-channel support). While connected to a network on
+  a 5 GHz DFS channel (52–144), Wi-Fi Direct connections fail; they work
+  without a Wi-Fi connection or with a network on 2.4 GHz or channels
+  36–48.
 - `vendor/nvidia` contains NVIDIA's proprietary binaries as published by
   TheMuppets; three camera libraries and `libglcore` carry small symbol
   renames (see `device/nvidia/t124-common/extract/patches.sh`).
