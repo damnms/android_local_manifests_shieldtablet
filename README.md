@@ -19,6 +19,7 @@ version the 3.10 kernel can run (Android 12 needs eBPF).
 | `vendor/nvidia` | [damnms/proprietary_vendor_nvidia](https://github.com/damnms/proprietary_vendor_nvidia) | `lineage-18.1-shieldtablet` |
 | `frameworks/av` | [damnms/android_frameworks_av](https://github.com/damnms/android_frameworks_av) | `lineage-18.1-shieldtablet` |
 | `frameworks/base` | [damnms/android_frameworks_base](https://github.com/damnms/android_frameworks_base) | `lineage-18.1-shieldtablet` |
+| `frameworks/native` | [damnms/android_frameworks_native](https://github.com/damnms/android_frameworks_native) | `lineage-18.1-shieldtablet` |
 | `frameworks/opt/net/wifi` | [damnms/android_frameworks_opt_net_wifi](https://github.com/damnms/android_frameworks_opt_net_wifi) | `lineage-18.1-shieldtablet` |
 | `hardware/interfaces` | [damnms/android_hardware_interfaces](https://github.com/damnms/android_hardware_interfaces) | `lineage-18.1-shieldtablet` |
 | `system/memory/lmkd` | [damnms/android_system_memory_lmkd](https://github.com/damnms/android_system_memory_lmkd) | `lineage-18.1-shieldtablet` |
@@ -94,6 +95,9 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
 - The backlight stays at PWM level 30 or above (the panel flickers below):
   slider minimum, the dimmed screen before screen off and the darkest
   automatic brightness level.
+- Chrome/Chromium no longer shows garbled content: the NVIDIA HWC1 shows
+  buffers of SurfaceControl layers wrongly as overlays, so SurfaceFlinger
+  composes these layers on the GPU (`debug.sf.client_composition_buffer_state`).
 
 Known and harmless: a few denials of platform domains (`storaged` reading
 eMMC statistics, Settings calling `storaged`/`wificond`, Gallery reading a

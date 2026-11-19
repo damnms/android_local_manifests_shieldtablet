@@ -8,12 +8,14 @@
   <!-- Forked platform projects -->
   <remove-project name="LineageOS/android_frameworks_av" />
   <remove-project name="LineageOS/android_frameworks_base" />
+  <remove-project name="LineageOS/android_frameworks_native" />
   <remove-project name="LineageOS/android_frameworks_opt_net_wifi" />
   <remove-project name="LineageOS/android_hardware_interfaces" />
   <remove-project name="platform/system/memory/lmkd" />
 
   <project path="frameworks/av" name="damnms/android_frameworks_av" remote="github" revision="lineage-18.1-shieldtablet" />
   <project path="frameworks/base" name="damnms/android_frameworks_base" remote="github" revision="lineage-18.1-shieldtablet" />
+  <project path="frameworks/native" name="damnms/android_frameworks_native" remote="github" revision="lineage-18.1-shieldtablet" />
   <project path="frameworks/opt/net/wifi" name="damnms/android_frameworks_opt_net_wifi" remote="github" revision="lineage-18.1-shieldtablet" />
   <project path="hardware/interfaces" name="damnms/android_hardware_interfaces" remote="github" revision="lineage-18.1-shieldtablet" />
   <project path="system/memory/lmkd" name="damnms/android_system_memory_lmkd" remote="github" revision="lineage-18.1-shieldtablet" />
