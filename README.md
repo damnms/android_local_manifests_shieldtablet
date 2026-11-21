@@ -105,6 +105,10 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
   password): the software keymaster and gatekeeper replace NVIDIA's TLK
   keymaster, which cannot create keys without `tlk_daemon` (its storage is
   on `/data`); vold looped on "Failed to generate keypair".
+- Boot with an encrypted `/data`: credstore, tombstoned, nvphsd, the GNSS
+  HAL and gpsd are stopped while vold switches from the temporary to the
+  decrypted `/data` (`class_reset_post_data` does nothing without
+  updatable APEX), so the unmount no longer fails with EBUSY.
 
 Known and harmless: a few denials of platform domains (`storaged` reading
 eMMC statistics, Settings calling `storaged`/`wificond`, Gallery reading a
