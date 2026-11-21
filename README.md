@@ -101,6 +101,10 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
 - Chrome/Chromium no longer shows garbled content: the NVIDIA HWC1 shows
   buffers of SurfaceControl layers wrongly as overlays, so SurfaceFlinger
   composes these layers on the GPU (`debug.sf.client_composition_buffer_state`).
+- Encryption ("Encrypt tablet") and the screen lock (PIN, pattern,
+  password): the software keymaster and gatekeeper replace NVIDIA's TLK
+  keymaster, which cannot create keys without `tlk_daemon` (its storage is
+  on `/data`); vold looped on "Failed to generate keypair".
 
 Known and harmless: a few denials of platform domains (`storaged` reading
 eMMC statistics, Settings calling `storaged`/`wificond`, Gallery reading a
