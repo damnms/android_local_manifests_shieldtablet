@@ -34,7 +34,8 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
 - Boot with SELinux enforcing: a T124 policy (`t124-common/sepolicy`),
   watchdogd in recovery, the usercalib partition.
 - Display: largest `vmalloc=` wins (the bootloader appends a smaller one),
-  the HWC1 GL composer runs with one RPC thread.
+  the HWC1 GL composer runs with one RPC thread, the HWC1 adapter closes
+  the framebuffer target fence (fd leak, crash on HDMI hotplug).
 - Binder: the 3.10 driver stored the opening thread instead of the process;
   fd transfers to apps failed once that thread exited (hardware bitmaps,
   ashmem, camera buffers). Backport of upstream "binder: use group leader
