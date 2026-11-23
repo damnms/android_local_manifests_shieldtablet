@@ -36,6 +36,9 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
 - Display: largest `vmalloc=` wins (the bootloader appends a smaller one),
   the HWC1 GL composer runs with one RPC thread, the HWC1 adapter closes
   the framebuffer target fence (fd leak, crash on HDMI hotplug).
+- HDMI: the HWC1 adapter prepares and sets one display at a time (as
+  SurfaceFlinger presents them) and reports a monitor connected at boot;
+  the kernel announces HDMI audio after the HDA setup.
 - Binder: the 3.10 driver stored the opening thread instead of the process;
   fd transfers to apps failed once that thread exited (hardware bitmaps,
   ashmem, camera buffers). Backport of upstream "binder: use group leader
