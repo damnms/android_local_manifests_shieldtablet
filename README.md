@@ -22,6 +22,7 @@ version the 3.10 kernel can run (Android 12 needs eBPF).
 | `frameworks/native` | [damnms/android_frameworks_native](https://github.com/damnms/android_frameworks_native) | `lineage-18.1-shieldtablet` |
 | `frameworks/opt/net/wifi` | [damnms/android_frameworks_opt_net_wifi](https://github.com/damnms/android_frameworks_opt_net_wifi) | `lineage-18.1-shieldtablet` |
 | `hardware/interfaces` | [damnms/android_hardware_interfaces](https://github.com/damnms/android_hardware_interfaces) | `lineage-18.1-shieldtablet` |
+| `packages/apps/Jelly` | [damnms/android_packages_apps_Jelly](https://github.com/damnms/android_packages_apps_Jelly) | `lineage-18.1-shieldtablet` |
 | `system/memory/lmkd` | [damnms/android_system_memory_lmkd](https://github.com/damnms/android_system_memory_lmkd) | `lineage-18.1-shieldtablet` |
 | `device/nvidia/icera`, `hardware/nvidia/*` | LineageOS, unchanged | `lineage-18.1` |
 
@@ -53,6 +54,8 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
 - Memory: lmkd parses `/proc/zoneinfo` of pre-4.8 kernels again.
 - WebView/browser: no GL preload in zygote; libglcore realloc fix (the
   browser no longer waits ~10 s on start).
+- Browser (Jelly): full screen videos stay in full screen; the status and
+  navigation bars no longer flash over them.
 - Sensors as a binderized HAL, own OTA and changelog URLs.
 - Wi-Fi uses a randomized MAC per network; scans skip channels the driver
   does not offer yet (no stall on DFS networks after boot).
