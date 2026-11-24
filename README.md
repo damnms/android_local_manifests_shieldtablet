@@ -39,7 +39,14 @@ comes from the LineageOS manifest, branch `lineage-18.1`.
   the framebuffer target fence (fd leak, crash on HDMI hotplug).
 - HDMI: the HWC1 adapter prepares and sets one display at a time (as
   SurfaceFlinger presents them) and reports a monitor connected at boot;
-  the kernel announces HDMI audio after the HDA setup.
+  the kernel announces HDMI audio once the HDA codec has the monitor's
+  ELD. The panel is composed on the GPU while HDMI is connected (the HWC1
+  glitched on the rotated panel).
+- HDMI audio policy: the HDMI device port carries the address Android 11
+  connects it with; an output is repatched when its device ids are stale;
+  a device connected again keeps its id, and an already connected output
+  is accepted (FDE unlock restarts the framework). Web video over HDMI no
+  longer plays too fast, unplugging switches back to the speaker.
 - Binder: the 3.10 driver stored the opening thread instead of the process;
   fd transfers to apps failed once that thread exited (hardware bitmaps,
   ashmem, camera buffers). Backport of upstream "binder: use group leader
