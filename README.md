@@ -29,18 +29,22 @@ system_server).
 | `hardware/interfaces` | [damnms/android_hardware_interfaces](https://github.com/damnms/android_hardware_interfaces) | `lineage-20.0-shieldtablet` |
 | `packages/apps/Jelly` | [damnms/android_packages_apps_Jelly](https://github.com/damnms/android_packages_apps_Jelly) | `lineage-20.0-shieldtablet` |
 | `system/memory/lmkd` | [damnms/android_system_memory_lmkd](https://github.com/damnms/android_system_memory_lmkd) | `lineage-20.0-shieldtablet` |
+| `packages/modules/Wifi` | [damnms/android_packages_modules_Wifi](https://github.com/damnms/android_packages_modules_Wifi) | `lineage-20.0-shieldtablet` |
+| `frameworks/opt/net/wifi` | [damnms/android_frameworks_opt_net_wifi](https://github.com/damnms/android_frameworks_opt_net_wifi) | `lineage-20.0-shieldtablet` |
 | `hardware/nvidia/*` | LineageOS, unchanged | `lineage-20.0` |
 
 The device trees, kernel and blobs continue the 18.1 forks; the shared
 NVIDIA repositories and the framework forks start from LineageOS 20
-(`lineage-20` / `lineage-20.0`). The rest of the tree comes from the
+(`lineage-20` / `lineage-20.0`), `frameworks/opt/net/wifi` from AOSP
+(`android-13.0.0_r75`). The rest of the tree comes from the
 LineageOS manifest, branch `lineage-20.0`.
 
 ## What works
 
-Display and GPU (NVIDIA GLES, HWC1), Wi-Fi, Bluetooth, audio playback and
-recording, camera (photo and video), hardware video decoding and encoding,
-sensors, GPS daemon, USB adb, SELinux enforcing.
+Display and GPU (NVIDIA GLES, HWC1), Wi-Fi 2.4 and 5 GHz, Bluetooth,
+audio playback and recording, HDMI picture and sound, camera (photo,
+1080p30 video), hardware video decoding and encoding, sensors, GPS,
+deep sleep, file-based encryption, USB adb, SELinux enforcing.
 
 ## Android 13 specifics on this device
 
@@ -55,7 +59,10 @@ sensors, GPS daemon, USB adb, SELinux enforcing.
   audio service stays off vndbinder.
 - The boot animation frees each part's textures once it is done (it kept
   up to 879 MiB in GPU memory and ran the 2 GB device out of memory).
-- Camera: cameraserver skips its JPEG header fixup
+- Camera: the NVIDIA HAL's video stabilization drops every second frame
+  while recording; cameraserver hides it
+  (`ro.vendor.camera.disable_video_stabilization`), video records at
+  30 fps. cameraserver skips its JPEG header fixup
   (`ro.vendor.camera.skip_hidl_jpeg_blob_fixup`, the NVIDIA HAL still holds
   the buffer lock) and ImageReader reads the unconverted header; ACodec
   derives the AVC level when an app sets only a profile (CameraX).
@@ -72,13 +79,23 @@ sensors, GPS daemon, USB adb, SELinux enforcing.
   SIM status, phone number and IMEI entries in Settings.
 - The camera HAL's `execmem` attempts are not logged (one per preview
   frame; allowing them changes no frame rate).
+- Wi-Fi without telephony: the country code comes from the 802.11d
+  element of nearby access points (most access points, kept while two
+  still report it), which enables the 5 GHz and DFS channels. When it
+  arrives after the first connection on 2.4 GHz, Wi-Fi reconnects once.
+  Scans skip channels the driver does not offer.
+- bcmdhd has no SHA256 key management and no PMF: neither is offered to
+  wpa_supplicant (`config_wifiSha256KeyMgmtSupported`, `pmf=0`), and the
+  Wi-Fi pickers mark networks that need them as not supported.
+- HDMI audio: the declared port carries the address Android connects
+  HDMI with (one HDMI device, no AAudio stream restarts).
 - OTA updates come from `shieldtablet-20.0.json` in
   `damnms/android_releases_shieldtablet`; 18.1 keeps its own file and
   does not offer 20.
 - nvphsd runs without the `il` governor: it reads `/proc/<pid>/largest_task`,
   which the 3.10 kernel lacks, and never changed a clock limit.
 - The 18.1 fixes for HWC1, camera fences, audio policy, ACodec, lmkd,
-  screen recording and Jelly are carried over.
+  screen recording, Jelly, Wi-Fi and HDMI audio are carried over.
 
 Every change is a separate commit (Conventional Commits) with the reason
 in its message.
@@ -114,7 +131,6 @@ The result is
   the Updater app or `adb sideload`.
 - Release builds are signed with private keys that are not part of any
   repository; without your own keys the build uses the public test keys.
-- Open points: headphones and HDMI not tested yet; camera video records
-  at about 14 frames per second (the NVIDIA camera stack delivers no
-  more, the GPU clock is not the limit); the Wi-Fi hotspot offload (BPF
-  maps cannot be labeled on 3.10).
+- Not tested: headphones, Bluetooth audio, hotspot with a client, the
+  LTE model. The hotspot forwards in software (its BPF offload maps
+  cannot be labeled on 3.10).

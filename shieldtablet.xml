@@ -12,6 +12,8 @@
   <remove-project name="LineageOS/android_hardware_interfaces" />
   <remove-project name="LineageOS/android_packages_apps_Jelly" />
   <remove-project name="LineageOS/android_system_memory_lmkd" />
+  <remove-project name="LineageOS/android_packages_modules_Wifi" />
+  <remove-project name="platform/frameworks/opt/net/wifi" />
 
   <project path="frameworks/av" name="damnms/android_frameworks_av" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk" />
   <project path="frameworks/base" name="damnms/android_frameworks_base" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk-cw-fs,pdk-fs" />
@@ -19,6 +21,8 @@
   <project path="hardware/interfaces" name="damnms/android_hardware_interfaces" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk" />
   <project path="packages/apps/Jelly" name="damnms/android_packages_apps_Jelly" remote="github" revision="lineage-20.0-shieldtablet" />
   <project path="system/memory/lmkd" name="damnms/android_system_memory_lmkd" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk" />
+  <project path="packages/modules/Wifi" name="damnms/android_packages_modules_Wifi" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk-cw-fs,pdk-fs" />
+  <project path="frameworks/opt/net/wifi" name="damnms/android_frameworks_opt_net_wifi" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk" />
 
   <!-- Device, kernel and vendor (forks) -->
   <project path="device/nvidia/shieldtablet" name="damnms/android_device_nvidia_shieldtablet" remote="github" revision="lineage-20.0-shieldtablet" />
