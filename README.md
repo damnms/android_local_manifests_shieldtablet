@@ -59,6 +59,8 @@ sensors, GPS daemon, USB adb, SELinux enforcing.
   (`ro.vendor.camera.skip_hidl_jpeg_blob_fixup`, the NVIDIA HAL still holds
   the buffer lock) and ImageReader reads the unconverted header; ACodec
   derives the AVC level when an app sets only a profile (CameraX).
+- nvphsd runs without the `il` governor: it reads `/proc/<pid>/largest_task`,
+  which the 3.10 kernel lacks, and never changed a clock limit.
 - The 18.1 fixes for HWC1, camera fences, audio policy, ACodec, lmkd,
   screen recording and Jelly are carried over.
 
@@ -94,6 +96,5 @@ The result is
   *Format data*.
 - Release builds are signed with private keys that are not part of any
   repository; without your own keys the build uses the public test keys.
-- Open points: headphones and HDMI not tested yet, nvphsd polls a kernel
-  node the 3.10 kernel lacks, the Wi-Fi hotspot offload (BPF maps cannot
-  be labeled on 3.10).
+- Open points: headphones and HDMI not tested yet, the Wi-Fi hotspot
+  offload (BPF maps cannot be labeled on 3.10).
