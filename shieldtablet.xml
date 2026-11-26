@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  NVIDIA SHIELD Tablet (shieldtablet), LineageOS 18.1 (Android 11), unofficial.
-  Forks with the device fixes live on branch lineage-18.1-shieldtablet,
+  NVIDIA SHIELD Tablet (shieldtablet), LineageOS 20 (Android 13), unofficial bring-up.
+  Forks with the device fixes live on branch lineage-20.0-shieldtablet,
   the remaining NVIDIA repositories come unchanged from LineageOS.
 -->
 <manifest>
@@ -9,31 +9,29 @@
   <remove-project name="LineageOS/android_frameworks_av" />
   <remove-project name="LineageOS/android_frameworks_base" />
   <remove-project name="LineageOS/android_frameworks_native" />
-  <remove-project name="LineageOS/android_frameworks_opt_net_wifi" />
   <remove-project name="LineageOS/android_hardware_interfaces" />
   <remove-project name="LineageOS/android_packages_apps_Jelly" />
-  <remove-project name="platform/system/memory/lmkd" />
+  <remove-project name="LineageOS/android_system_memory_lmkd" />
 
-  <project path="frameworks/av" name="damnms/android_frameworks_av" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="frameworks/base" name="damnms/android_frameworks_base" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="frameworks/native" name="damnms/android_frameworks_native" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="frameworks/opt/net/wifi" name="damnms/android_frameworks_opt_net_wifi" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="hardware/interfaces" name="damnms/android_hardware_interfaces" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="packages/apps/Jelly" name="damnms/android_packages_apps_Jelly" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="system/memory/lmkd" name="damnms/android_system_memory_lmkd" remote="github" revision="lineage-18.1-shieldtablet" />
+  <project path="frameworks/av" name="damnms/android_frameworks_av" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk" />
+  <project path="frameworks/base" name="damnms/android_frameworks_base" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk-cw-fs,pdk-fs" />
+  <project path="frameworks/native" name="damnms/android_frameworks_native" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk" />
+  <project path="hardware/interfaces" name="damnms/android_hardware_interfaces" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk" />
+  <project path="packages/apps/Jelly" name="damnms/android_packages_apps_Jelly" remote="github" revision="lineage-20.0-shieldtablet" />
+  <project path="system/memory/lmkd" name="damnms/android_system_memory_lmkd" remote="github" revision="lineage-20.0-shieldtablet" groups="pdk" />
 
   <!-- Device, kernel and vendor (forks) -->
-  <project path="device/nvidia/shieldtablet" name="damnms/android_device_nvidia_shieldtablet" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="device/nvidia/t124-common" name="damnms/android_device_nvidia_t124-common" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="device/nvidia/tegra-common" name="damnms/android_device_nvidia_tegra-common" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="device/nvidia/shield-common" name="damnms/android_device_nvidia_shield-common" remote="github" revision="lineage-18.1-shieldtablet" />
+  <project path="device/nvidia/shieldtablet" name="damnms/android_device_nvidia_shieldtablet" remote="github" revision="lineage-20.0-shieldtablet" />
+  <project path="device/nvidia/t124-common" name="damnms/android_device_nvidia_t124-common" remote="github" revision="lineage-20.0-shieldtablet" />
+  <project path="device/nvidia/tegra-common" name="damnms/android_device_nvidia_tegra-common" remote="github" revision="lineage-20.0-shieldtablet" />
+  <project path="device/nvidia/shield-common" name="damnms/android_device_nvidia_shield-common" remote="github" revision="lineage-20.0-shieldtablet" />
+  <project path="device/nvidia/sepolicy" name="damnms/android_device_nvidia_sepolicy" remote="github" revision="lineage-20.0-shieldtablet" />
+  <project path="device/nvidia/icera" name="damnms/android_device_nvidia_icera" remote="github" revision="lineage-20.0-shieldtablet" />
   <project path="device/nvidia/touch" name="damnms/android_device_nvidia_touch" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="device/nvidia/sepolicy" name="damnms/android_device_nvidia_sepolicy" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="kernel/nvidia/shield" name="damnms/android_kernel_nvidia_shield" remote="github" revision="lineage-18.1-shieldtablet" />
-  <project path="vendor/nvidia" name="damnms/proprietary_vendor_nvidia" remote="github" revision="lineage-18.1-shieldtablet" />
+  <project path="kernel/nvidia/shield" name="damnms/android_kernel_nvidia_shield" remote="github" revision="lineage-20.0-shieldtablet" />
+  <project path="vendor/nvidia" name="damnms/proprietary_vendor_nvidia" remote="github" revision="lineage-20.0-shieldtablet" />
 
   <!-- Unchanged LineageOS repositories -->
-  <project path="device/nvidia/icera" name="LineageOS/android_device_nvidia_icera" />
   <project path="hardware/nvidia/interfaces" name="LineageOS/android_hardware_nvidia_interfaces" />
   <project path="hardware/nvidia/light" name="LineageOS/android_hardware_nvidia_light" />
   <project path="hardware/nvidia/memtrack" name="LineageOS/android_hardware_nvidia_memtrack" />
