@@ -2,13 +2,13 @@
 
 This local manifest builds LineageOS 20 (Android 13) for the NVIDIA
 SHIELD Tablet K1 / SHIELD Tablet, codename `shieldtablet` (Tegra K1, T124).
-LineageOS never shipped 20 for this device. This branch is a bring-up:
-it boots and runs daily use, there is no release yet. LineageOS 18.1 for
-this device is on branch `lineage-18.1`.
+LineageOS never shipped 20 for this device. LineageOS 18.1 for this
+device is on branch `lineage-18.1`.
 
 Android 12 and later need eBPF in the kernel; the 3.10 kernel here carries
-a backport (eBPF, cgroup v2, cpusets, file-based encryption, a kernel
-version spoof for bpfloader and system_server).
+a backport (eBPF, cgroup v2, cpusets, file-based encryption, the
+`tcp_info` counters of 4.2, a kernel version spoof for bpfloader and
+system_server).
 
 ## Repositories
 
@@ -59,6 +59,22 @@ sensors, GPS daemon, USB adb, SELinux enforcing.
   (`ro.vendor.camera.skip_hidl_jpeg_blob_fixup`, the NVIDIA HAL still holds
   the buffer lock) and ImageReader reads the unconverted header; ACodec
   derives the AVC level when an app sets only a profile (CameraX).
+- `/data` is encrypted with file-based encryption (v1, AES-256-XTS, keys
+  through keystore2 and the software keymaster). After a reboot the
+  user data stays locked until the PIN, pattern or password is entered.
+- Suspend: the kernel saves a thread's VFP/NEON registers on suspend only
+  when the hardware holds them; before, the thread that suspended got
+  kernel AES data as its registers back, the suspend service crashed
+  after the first suspend and the tablet never suspended again.
+- The network stack reads `tcp_info` up to `tcpi_segs_in` (it logged an
+  error every 20 s on the 104-byte 3.10 layout).
+- On the Wi-Fi model (`ro.boot.modem=none`) a runtime overlay hides the
+  SIM status, phone number and IMEI entries in Settings.
+- The camera HAL's `execmem` attempts are not logged (one per preview
+  frame; allowing them changes no frame rate).
+- OTA updates come from `shieldtablet-20.0.json` in
+  `damnms/android_releases_shieldtablet`; 18.1 keeps its own file and
+  does not offer 20.
 - nvphsd runs without the `il` governor: it reads `/proc/<pid>/largest_task`,
   which the 3.10 kernel lacks, and never changed a clock limit.
 - The 18.1 fixes for HWC1, camera fences, audio policy, ACodec, lmkd,
@@ -93,8 +109,12 @@ The result is
 
 - The zip writes only system and boot. Coming from 18.1 or another ROM
   needs the recovery from this build (`fastboot flash recovery`) and
-  *Format data*.
+  *Format data*; the first boot afterwards sets up the encryption.
+- The recovery cannot read the encrypted `/data`: install updates with
+  the Updater app or `adb sideload`.
 - Release builds are signed with private keys that are not part of any
   repository; without your own keys the build uses the public test keys.
-- Open points: headphones and HDMI not tested yet, the Wi-Fi hotspot
-  offload (BPF maps cannot be labeled on 3.10).
+- Open points: headphones and HDMI not tested yet; camera video records
+  at about 14 frames per second (the NVIDIA camera stack delivers no
+  more, the GPU clock is not the limit); the Wi-Fi hotspot offload (BPF
+  maps cannot be labeled on 3.10).
